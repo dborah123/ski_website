@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-{% comment %} JS goes here {% endcomment %}
+    <script src="{% static 'trips/home.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -12,8 +12,14 @@ home
 
 {% block content %}
 Hello World
-{% csrf_token %}
-{{trip_form|crispy}}
+
+{% comment %} TRIP FORM {% endcomment %}
+<form action="" method="POST" id="save-trip-form">
+    {% csrf_token %}
+    {{trip_form|crispy}}
+    <button type="submit" class="btn btn-primary mt-2" id="save-trip-btn">Save Trip</button>
+</form>
+<div id="alert-box"></div>
 
 {% endblock content %}
 

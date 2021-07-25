@@ -10,6 +10,7 @@ class Destination(models.Model):
     def __str__(self):
         return self.location
 
+
 class Trip(models.Model):
     trip_name = models.CharField(max_length=50, blank=True)
     date_arrived = models.DateField(blank=True, null=True)
@@ -17,7 +18,6 @@ class Trip(models.Model):
     hotel = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
-
 
     def __str__(self):
         return self.trip_name
