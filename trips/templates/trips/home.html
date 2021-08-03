@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-    <script src="{% static 'trips/home.js' %}" defer></script>
+    <script src="{% static 'trips/home.js' %}"></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -11,7 +11,6 @@ home
 {% endblock title %}
 
 {% block content %}
-Hello World
 
 {% comment %} TRIP FORM {% endcomment %}
 <form action="" method="POST" id="save-trip-form">
@@ -19,7 +18,31 @@ Hello World
     {{trip_form|crispy}}
     <button type="submit" class="btn btn-primary mt-2" id="save-trip-btn">Save Trip</button>
 </form>
+<br>
 <div id="alert-box"></div>
+
+<div class="home-links">
+    <a href="{% url 'trips:trips' %}">
+        <button type="submit" class="btn btn-secondary btn-lg">See Trips</button>
+    </a>
+</div>
+
+
+
+
+{% comment %} SCRIPTS {% endcomment %}
+{% if trip_created == 1 %}
+    <script type="text/javascript">handleAlerts("success", "Trip created");</script>
+    <div class="home-links">
+        <a href="https://youtube.com">
+            <button type="submit" class="btn btn-secondary btn-lg">Add details to new trip</button>
+        </a>
+    <div>
+{% elif trip_created == 2 %}
+    <script type="text/javascript">handleAlerts("danger", "Oops...there's a conflicting trip");</script>
+{% endif %}
+
+
 
 {% endblock content %}
 

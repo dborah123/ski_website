@@ -1,17 +1,6 @@
-console.log("hello world");
-
 //VARIABLES FROM "home.html":
 
-const saveTripButton = document.getElementById('save-trip-button');
-const saveTripForm = document.getElementById('save-trip-from');
-const alertBox = document.getElementById('alert-box');
-const tripCreated = document.getElementById('trip_created')
-
-
-
-// FUNCTIONS:
-
-const handleAlerts = (type, msg) => {
+function handleAlerts(type, msg){
     /*
     Parameters:
     type: the type of alert one wants displayed
@@ -19,6 +8,8 @@ const handleAlerts = (type, msg) => {
 
     Returns an alert written in html using boostrap
     */
+    const alertBox = document.getElementById('alert-box');
+    console.log(msg);
     alertBox.innerHTML = `
         <div class="alert alert-${type}" role="alert">
             ${msg}
@@ -26,12 +17,16 @@ const handleAlerts = (type, msg) => {
     `
 }
 
-saveTripForm.addEventListener('submit', ()=>{
-    console.log('clicked')
-    if(tripCreated){
-        handleAlerts('success', 'Trip Created');
-    }
-    else{
-        handleAlerts('danger', 'Oops...something went wrong');
-    }
-})
+function redirectToTrips(url){
+    /*
+    PARAMETERS:
+    None
+
+    Redirects user to trips overview page if they decide to delete a trip
+    */
+    console.log("here");
+    console.log(typeof url);
+    alert("redirecting...");
+    window.location.replace(url);
+
+}

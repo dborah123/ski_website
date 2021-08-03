@@ -9,6 +9,14 @@ class Destination(models.Model):
 
     def __str__(self):
         return self.location
+        
+
+class Resort(models.Model):
+    resort_name = models.CharField(max_length=200)
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.resort_name
 
 
 class Trip(models.Model):

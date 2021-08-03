@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+{% block title %}
+add day
+{% endblock title %}
+
+
+{% block content %}
+{{day_form|crispy}}
+{% endblock content %}
+

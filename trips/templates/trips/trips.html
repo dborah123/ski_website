@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+{% block title %}
+trips
+{% endblock title %}
+
+
+{% block content %}
+
+
+<h3>Current Trips</h3><hr>
+{% if current_trips %}
+    {% for trip in current_trips %}
+        
+        Trip Name: {{trip.trip_name}} |
+        Destination: {{trip.destination}} |
+        Arrival Date: {{trip.date_arrived}} |
+        Departure Date: {{trip.date_departed}} |
+        Hotel: {{trip.hotel}} |
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group p-1" role="group">
+                <a href="{% url 'trips:detail' trip.id %}" class="btn btn-outline-primary">View Trip</a>
+            </div>
+            <div class="btn-group p-1" role="group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Delete Trip</button>
+                    <input type="hidden" value="{{trip.id}}" name="pk">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-secondary" role="alert">
+        No trips currently
+    </div>
+{% endif %}
+
+<h3>Planned Trips</h3><hr>
+{% if planned_trips %}
+    {% for trip in planned_trips %}
+        Trip Name: {{trip.trip_name}} |
+        Destination: {{trip.destination}} |
+        Arrival Date: {{trip.date_arrived}} |
+        Departure Date: {{trip.date_departed}} |
+        Hotel: {{trip.hotel}} |
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group p-1" role="group">
+                <a href="{% url 'trips:detail' trip.id %}" class="btn btn-outline-primary">View Trip</a>
+            </div>
+            <div class="btn-group p-1" role="group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Delete Trip</button>
+                    <input type="hidden" value="{{trip.id}}" name="pk">
+                </form>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-secondary" role="alert">
+        Looks like there's nothing here
+    </div>
+{% endif %}
+
+<h3>Past Trips</h3><hr>
+{% if past_trips %}
+    {% for trip in past_trips %}
+        Trip Name: {{trip.trip_name}} |
+        Destination: {{trip.destination}} |
+        Arrival Date: {{trip.date_arrived}} |
+        Departure Date: {{trip.date_departed}} |
+        Hotel: {{trip.hotel}} |
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group p-1" role="group">
+                <a href="{% url 'trips:detail' trip.id %}" class="btn btn-outline-primary">View Trip</a>
+            </div>
+            <div class="btn-group p-1" role="group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Delete Trip</button>
+                    <input type="hidden" value="{{trip.id}}" name="pk">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-secondary" role="alert">
+        Looks like there's nothing here
+    </div>
+{% endif %}
+
+
+
+
+
+{% endblock content %}
+
+
