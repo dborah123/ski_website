@@ -5,6 +5,10 @@ from days.models import Day
 from trips.models import Trip
 import datetime
 import json, requests
+
+#API Key Imports
+from decouple import config
+
 #authentication imports
 from django.contrib.auth.decorators import login_required
 
@@ -53,13 +57,15 @@ def home_view(request):
     
     if(current_day != None):
         zip_code = current_day.ski_area.zip_code
+
+        api_key = config("WEATHER_API_KEY")
         
         if(str(current_trip.destination) == "British Columbia"):
-            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={zip_code},ca&units={units}&appid=b6ac4a5dac5a00f0599a26136811c600")
+            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={zip_code},ca&units={units}&appid={api_key}")
             weather = response.json()
         
         else:
-            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?zip={zip_code},us&units={units}&appid=b6ac4a5dac5a00f0599a26136811c600")
+            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?zip={zip_code},us&units={units}&appid={api_key}")
             weather = response.json()
 
         #Change visibility to miles if units=imperial
