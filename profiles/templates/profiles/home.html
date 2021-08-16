@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<h2 class="home-title"><strong>Ski Trip Application Home</strong></h2>
+<hr>
+
+<h3><strong>Current Trip:</strong></h3>
+
+<div class="home-current-trip bg-dark bg-gradient">
+    <h4>Name: {{current_trip.trip_name}}</h4><br>
+    Dates: From {{current_trip.date_arrived}} to {{current_trip.date_departed}}<br>
+    Destination: {{current_trip.destination}}<br>
+    Hotel: {{current_trip.hotel}}<br>
+</div>
+<hr>
+
+<h3><strong>Today's Agenda:</strong></h3>
+
+<div class="home-current-trip bg-dark bg-gradient">
+    <h5>Ski Resort: {{current_day.ski_area}}</h5><br>
+    Restaurant: {{current_day.restaurant}}<br>
+    Today's Date: {{current_day.date}}<br>
+</div>
+<hr>
+
+<h4><strong>Weather at {{current_day.ski_area}}:</strong></h4>
+
+<div class="bg-primary bg-gradient text-white home-weather">
+    Description: {{weather.weather.0.description}}<br>
+    <strong>Temperature: </strong><br>
+        Current Temperature: {{weather.main.temp}} degrees<br>
+        Low: {{weather.main.temp_min}} degrees<br>
+        High: {{weather.main.temp_max}} degrees<br>
+        Feels like: {{weather.main.feels_like}} degrees<br>
+    Wind Speed: {{weather.wind.speed}} {% if units_bool %}mph{% else %}m/s{% endif %}<br>
+    Visibility: {{weather.visibility}} {% if units_bool %}miles{% else %}m{% endif %}<br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="switch" value="{{units_bool}}">
+        <button type="submit" class="btn btn-secondary mt-2">Switch to {{opp_units}}</button>
+    </form>    
+</div>
+{% endblock content %}
+

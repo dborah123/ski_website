@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+    <script src="{% static 'trips/home.js' %}"></script>
+{% endblock scripts %}
+
+{% block title %}
+my profile
+{% endblock title %}
+
+{% block content %}
+<h2><u>{{profile.user}}'s profile:</u></h2>
+<div class="text-center">
+    <img src="{{profile.avatar.url}}" alt="my-profile" class="avatar-big">
+</div>
+<br>
+
+<form action="" method="POST" enctype="multipart/form-data" class="profile-form">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary mb-2 mt-2">update</button>
+</form>
+
+<div id="alert-box"></div>
+
+{% comment %} SCRIPTS/LOGIC {% endcomment %}
+{% if confirm %}
+    <script type="text/javascript" >handleAlerts("success", "Profile updated");</script>
+{% endif %}
+{% endblock content %}

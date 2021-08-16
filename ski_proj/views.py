@@ -32,7 +32,7 @@ def login_view(request):
                     return redirect(request.GET.get('next'))
                 else:
                     # Brings user to homepage
-                    return redirect('trips:home')
+                    return redirect('profiles:home')
         else:
             error_message = "Oops... something wen wrong"
 

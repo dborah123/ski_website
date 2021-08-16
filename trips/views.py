@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 @login_required
-def home_view(request):
+def trip_create_view(request):
     '''
     FOR 'home.html'
 
@@ -43,7 +43,6 @@ def home_view(request):
             new_trip = Trip.objects.get_or_create(trip_name=trip_name, date_arrived=date_arrived, date_departed=date_departed, hotel=hotel, user=user, destination=destination)
             trip_created = 1
         
-
 
     context = {
         'trip_form':trip_form,
@@ -111,14 +110,23 @@ def trip_details_view(request, **kwargs):
     '''
     Returns the details of a singular trip
     '''
+    #Get pk from url kwarg
     pk = kwargs.get('pk')
 
-    if(request.method == "POST"):
+    if(request.method == "POST" and request.POST.get('delete', False) == "del"):
         #Deletes trip object and reroutes user to trip overview
         Trip.objects.get(pk=pk).delete()
         return redirect('/trips')
 
     else:
+        if(request.method == "POST"):
+            #Delete specified day and reload page
+            day_pk = request.POST.get('pk')
+            try:
+                Day.objects.get(pk=day_pk).delete()
+            except Day.DoesNotExist:
+                pass
+
         trip = Trip.objects.get(pk=pk)
         days = Day.objects.filter(trip=pk).order_by('date')
 

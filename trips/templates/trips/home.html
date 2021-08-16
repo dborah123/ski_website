@@ -22,8 +22,8 @@ home
 <div id="alert-box"></div>
 
 <div class="home-links">
-    <a href="{% url 'trips:trips' %}">
-        <button type="submit" class="btn btn-secondary btn-lg">See Trips</button>
+    <a href="{% url 'trips:trips' %}" class="btn btn-primary btn-lg">
+        See Trips
     </a>
 </div>
 
@@ -34,8 +34,8 @@ home
 {% if trip_created == 1 %}
     <script type="text/javascript">handleAlerts("success", "Trip created");</script>
     <div class="home-links">
-        <a href="https://youtube.com">
-            <button type="submit" class="btn btn-secondary btn-lg">Add details to new trip</button>
+        <a href="{% url 'trips:detail' new_trip.0.id %}" class="btn btn-primary btn-lg">
+            Add details to new trip
         </a>
     <div>
 {% elif trip_created == 2 %}

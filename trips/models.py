@@ -14,7 +14,8 @@ class Destination(models.Model):
 class Resort(models.Model):
     resort_name = models.CharField(max_length=200)
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
-
+    zip_code = models.CharField(max_length=50)
+    #
     def __str__(self):
         return self.resort_name
 

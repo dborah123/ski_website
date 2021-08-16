@@ -17,6 +17,26 @@ function handleAlerts(type, msg){
     `
 }
 
+function handleAlertsLink(type, msg1, linkmsg, msg2, link){
+    /*
+    Parameters: type: the type of message one wants to display
+    msg1: the message before the link
+    linkmsg: the message the has the link
+    ms2: the message after the link
+    link: link
+
+    Returns an alert written in html using bootstrap
+    */
+
+    const alertBox = document.getElementById('alert-box');
+    console.log("here ayo")
+    alertBox.innerHTML = `
+        <div class="alert alert-${type}" role="alert">
+            ${msg1}<a href=${link} class="alert-link">${linkmsg}</a>${msg2}
+        </div>
+    `
+}
+
 function redirectToTrips(url){
     /*
     PARAMETERS:

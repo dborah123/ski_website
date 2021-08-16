@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block scripts %}
-
+    <script src="{% static 'trips/home.js' %}"></script>
 {% endblock scripts %}
 
 {% block title %}
@@ -12,6 +12,28 @@ add day
 
 
 {% block content %}
-{{day_form|crispy}}
+<h2><u>Create Day for {{trip_name}}:</u></h2>
+<hr>
+
+<div id="alert-box"></div>
+{% if full == 1 %}
+
+    <script type="text/javascript">handleAlertsLink("danger", "Oops...looks like you've planned all your days. Return to ", "{{trip_name}} Overview", "", "{% url 'trips:detail' trip_pk %}");</script>
+
+{% elif full == 4 %}
+    <script type="text/javascript">handleAlertsLink("success", "Congrats on planning all of your days for this trip. Return to ", "{{trip_name}} Overview", "", "{% url 'trips:detail' trip_pk %}");</script>
+
+
+{% else %}
+    {% if full == 3 %}
+        <script type="text/javascript">handleAlerts("success", "Day Created!");</script>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{day_form|crispy}}
+        <button type="submit" class="btn btn-primary mb-2 mt-2">Create Day</button>
+    </form>
+{% endif %}
+<a href="{% url 'trips:detail' trip_pk %}" class="btn btn-success">Return to {{trip_name}} Overview</a>
 {% endblock content %}
 

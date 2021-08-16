@@ -5,3 +5,54 @@
 .trip-detail-button{
     padding-top: 20px;
 }
+
+.avatar-big{
+    width: 300px;
+    height: auto;
+}
+
+.profile-form{
+    font-size: larger;
+    font-weight: 500;
+}
+
+.avatar-sm{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.logo-sm{
+    width: 150px;
+    height: auto;
+    background-blend-mode: screen;
+}
+
+.home-title{
+    text-align: center;
+}
+
+.home-current-trip{
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 15px;
+    color: rgb(175, 174, 174);
+}
+
+.detail-container{
+    width: 200px;
+    padding: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 2px solid #000;
+    border-radius: 15px;
+    color: rgb(192, 192, 192);
+}
+
+.home-weather{
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 15px;
+    color: rgb(175, 174, 174);
+
+}

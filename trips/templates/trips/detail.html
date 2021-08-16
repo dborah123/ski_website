@@ -19,8 +19,9 @@
 <strong><u>Hotel:</u></strong>   {{trip.hotel}}<br>
 
 
-<form action="" method="POST">
+<form action="" method="POST" id="delete-trip-btn">
     {% csrf_token %}
+    <input type="hidden" name="delete" value="del">
     <button type="submit" class="btn btn-outline-danger" id="detail-delete-button">Delete Trip</button>
 </form>
 
@@ -29,13 +30,24 @@
 
 <div class="row">
     {% for day in days %}
-        <div class="col">
-            Ski Area: {{day.ski_area}}<br>
-            Date: {{day.date}}<br>
-            Restaurant: {{day.restaurant}}<br>
-            <a href="https://www.youtube.com/watch?v=qFbrRXdruv4&list=RDqFbrRXdruv4&start_radio=1&ab_channel=17Mercer" class="card-body">
-                <button type="submit" class="btn btn-outline-primary">Edit Day</button>
-            </a>
+        <div class="col ">
+            <div class="detail-container bg-dark bg-gradient mb-3">
+                Ski Area: {{day.ski_area}}<br>
+                Date: {{day.date}}<br>
+                Restaurant: {{day.restaurant}}<br>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group p-1" role="group">
+                        <a href="{% url 'days:edit-day' day.id %}" class="btn btn-outline-primary mb-2 mt-1"> Edit </a>
+                    </div>
+                    <div class="btn-group p-1" role="group">
+                        <form action="" method="POST" id="delete-day-btn">
+                            {% csrf_token %}
+                            <input type="hidden" name="pk" value="{{day.pk}}">
+                            <button type="submit" class="btn btn-outline-danger mb-2 mt-1">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     {% if forloop.counter|divisibleby:4 %}
         <hr>
@@ -44,11 +56,6 @@
     {% endif %}
     {% endfor %}
 </div>
-
-
-
-
-
 
 
 <div class="trip-detail-button">
